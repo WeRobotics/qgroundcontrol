@@ -6,6 +6,7 @@
 # (c) 2009-2015 QGroundControl Developers
 # License terms set in COPYING.md
 # -------------------------------------------------
+# WeRobotics Extension
 
 QMAKE_PROJECT_DEPTH = 0 # undocumented qmake flag to force absolute paths in make files
 
