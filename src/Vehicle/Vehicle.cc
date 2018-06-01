@@ -74,6 +74,7 @@ const char* Vehicle::_battery2FactGroupName =       "battery2";
 const char* Vehicle::_windFactGroupName =           "wind";
 const char* Vehicle::_vibrationFactGroupName =      "vibration";
 const char* Vehicle::_temperatureFactGroupName =    "temperature";
+const char* Vehicle::_mosquitoMechanismFactGroupName =       "mosquitoMechanism";
 const char* Vehicle::_clockFactGroupName =          "clock";
 const char* Vehicle::_distanceSensorFactGroupName = "distanceSensor";
 
@@ -191,6 +192,7 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _windFactGroup(this)
     , _vibrationFactGroup(this)
     , _temperatureFactGroup(this)
+    , _mosquitoMechanismFactGroup(this)
     , _clockFactGroup(this)
     , _distanceSensorFactGroup(this)
 {
@@ -445,6 +447,7 @@ void Vehicle::_commonInit(void)
     _addFactGroup(&_windFactGroup,              _windFactGroupName);
     _addFactGroup(&_vibrationFactGroup,         _vibrationFactGroupName);
     _addFactGroup(&_temperatureFactGroup,       _temperatureFactGroupName);
+    _addFactGroup(&_mosquitoMechanismFactGroup,          _mosquitoMechanismFactGroupName);
     _addFactGroup(&_clockFactGroup,             _clockFactGroupName);
     _addFactGroup(&_distanceSensorFactGroup,    _distanceSensorFactGroupName);
 
@@ -3525,6 +3528,26 @@ VehicleTemperatureFactGroup::VehicleTemperatureFactGroup(QObject* parent)
     _temperature1Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
     _temperature2Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
     _temperature3Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
+}
+
+const char* VehicleMosquitoMechanismFactGroup::_mosquitoMechanism1FactName =      "mosquitoMechanism1";
+const char* VehicleMosquitoMechanismFactGroup::_mosquitoMechanism2FactName =      "mosquitoMechanism2";
+const char* VehicleMosquitoMechanismFactGroup::_mosquitoMechanism3FactName =      "mosquitoMechanism3";
+
+VehicleMosquitoMechanismFactGroup::VehicleMosquitoMechanismFactGroup(QObject* parent)
+    : FactGroup(1000, ":/json/Vehicle/MosquitoMechanismFact.json", parent)
+    , _mosquitoMechanism1Fact    (0, _mosquitoMechanism1FactName,     FactMetaData::valueTypeDouble)
+    , _mosquitoMechanism2Fact    (0, _mosquitoMechanism2FactName,     FactMetaData::valueTypeDouble)
+    , _mosquitoMechanism3Fact    (0, _mosquitoMechanism3FactName,     FactMetaData::valueTypeDouble)
+{
+    _addFact(&_mosquitoMechanism1Fact,       _mosquitoMechanism1FactName);
+    _addFact(&_mosquitoMechanism2Fact,       _mosquitoMechanism2FactName);
+    _addFact(&_mosquitoMechanism3Fact,       _mosquitoMechanism3FactName);
+
+    // Start out as not available "--.--"
+    _mosquitoMechanism1Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
+    _mosquitoMechanism2Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
+    _mosquitoMechanism3Fact.setRawValue      (std::numeric_limits<float>::quiet_NaN());
 }
 
 const char* VehicleClockFactGroup::_currentTimeFactName = "currentTime";

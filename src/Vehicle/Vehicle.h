@@ -329,6 +329,35 @@ private:
     Fact            _temperature3Fact;
 };
 
+class VehicleMosquitoMechanismFactGroup : public FactGroup
+{
+    Q_OBJECT
+
+public:
+    VehicleMosquitoMechanismFactGroup(QObject* parent = NULL);
+
+    Q_PROPERTY(Fact* mosquitoMechanism1       READ mosquitoMechanism1       CONSTANT)
+    Q_PROPERTY(Fact* mosquitoMechanism2       READ mosquitoMechanism2       CONSTANT)
+    Q_PROPERTY(Fact* mosquitoMechanism3       READ mosquitoMechanism3       CONSTANT)
+
+    Fact* mosquitoMechanism1 (void) { return &_mosquitoMechanism1Fact; }
+    Fact* mosquitoMechanism2 (void) { return &_mosquitoMechanism2Fact; }
+    Fact* mosquitoMechanism3 (void) { return &_mosquitoMechanism3Fact; }
+
+    static const char* _mosquitoMechanism1FactName;
+    static const char* _mosquitoMechanism2FactName;
+    static const char* _mosquitoMechanism3FactName;
+
+    static const char* _settingsGroup;
+
+    static const double _mosquitoMechanismUnavailable;
+
+private:
+    Fact            _mosquitoMechanism1Fact;
+    Fact            _mosquitoMechanism2Fact;
+    Fact            _mosquitoMechanism3Fact;
+};
+
 class VehicleClockFactGroup : public FactGroup
 {
     Q_OBJECT
@@ -532,6 +561,7 @@ public:
     Q_PROPERTY(FactGroup* wind        READ windFactGroup        CONSTANT)
     Q_PROPERTY(FactGroup* vibration   READ vibrationFactGroup   CONSTANT)
     Q_PROPERTY(FactGroup* temperature READ temperatureFactGroup CONSTANT)
+    Q_PROPERTY(FactGroup* mosquitoMechanism    READ mosquitoMechanismFactGroup    CONSTANT)
     Q_PROPERTY(FactGroup* clock       READ clockFactGroup       CONSTANT)
     Q_PROPERTY(FactGroup* setpoint    READ setpointFactGroup    CONSTANT)
 
@@ -821,6 +851,7 @@ public:
     FactGroup* windFactGroup            (void) { return &_windFactGroup; }
     FactGroup* vibrationFactGroup       (void) { return &_vibrationFactGroup; }
     FactGroup* temperatureFactGroup     (void) { return &_temperatureFactGroup; }
+    FactGroup* mosquitoMechanismFactGroup        (void) { return &_mosquitoMechanismFactGroup; }
     FactGroup* clockFactGroup           (void) { return &_clockFactGroup; }
     FactGroup* setpointFactGroup        (void) { return &_setpointFactGroup; }
     FactGroup* distanceSensorFactGroup  (void) { return &_distanceSensorFactGroup; }
@@ -1296,6 +1327,7 @@ private:
     VehicleWindFactGroup            _windFactGroup;
     VehicleVibrationFactGroup       _vibrationFactGroup;
     VehicleTemperatureFactGroup     _temperatureFactGroup;
+    VehicleMosquitoMechanismFactGroup        _mosquitoMechanismFactGroup;
     VehicleClockFactGroup           _clockFactGroup;
     VehicleSetpointFactGroup        _setpointFactGroup;
     VehicleDistanceSensorFactGroup  _distanceSensorFactGroup;
@@ -1322,6 +1354,7 @@ private:
     static const char* _windFactGroupName;
     static const char* _vibrationFactGroupName;
     static const char* _temperatureFactGroupName;
+    static const char* _mosquitoMechanismFactGroupName;
     static const char* _clockFactGroupName;
     static const char* _distanceSensorFactGroupName;
 

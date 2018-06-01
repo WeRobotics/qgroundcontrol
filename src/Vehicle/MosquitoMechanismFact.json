@@ -1,0 +1,23 @@
+[
+{
+    "name":             "mosquitoMechanism1",
+    "shortDescription": "Humidity (1)",
+    "type":             "double",
+    "decimalPlaces":    2,
+    "units":            "%"
+},
+{
+    "name":             "mosquitoMechanism2",
+    "shortDescription": "Humidity (2)",
+    "type":             "double",
+    "decimalPlaces":    2,
+    "units":            "%"
+},
+{
+    "name":             "mosquitoMechanism3",
+    "shortDescription": "Humidity (3)",
+    "type":             "double",
+    "decimalPlaces":    2,
+    "units":            "%"
+}
+]
