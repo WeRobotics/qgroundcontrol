@@ -570,7 +570,7 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
 
     if (message.sysid != _id && message.sysid != 0) {
         // We allow RADIO_STATUS messages which come from a link the vehicle is using to pass through and be handled
-        if (!(message.msgid == MAVLINK_MSG_ID_RADIO_STATUS && _containsLink(link))) {
+        if (!((message.msgid == MAVLINK_MSG_ID_RADIO_STATUS && _containsLink(link)) || message.msgid == MAVLINK_MSG_ID_WER_ONBOARD_STATUS)) {
             return;
         }
     }
@@ -718,6 +718,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_DISTANCE_SENSOR:
         _handleDistanceSensor(message);
         break;
+    case MAVLINK_MSG_ID_WER_ONBOARD_STATUS:
+        _handleWerOnboardStatus(message);
+        break;
     case MAVLINK_MSG_ID_PING:
         _handlePing(link, message);
         break;
@@ -826,6 +829,16 @@ void Vehicle::_handleDistanceSensor(mavlink_message_t& message)
             orientation2Fact.fact->setRawValue(distanceSensor.current_distance / 100.0); // cm to meters
         }
     }
+}
+
+void Vehicle::_handleWerOnboardStatus(mavlink_message_t& message) {
+    mavlink_wer_onboard_status_t onboardStatus;
+
+    mavlink_msg_wer_onboard_status_decode(&message, &onboardStatus);
+
+    _mosquitoMechanismFactGroup.mosquitoMechanism1()->setRawValue(onboardStatus.temperature[0] / 100.f);
+    _mosquitoMechanismFactGroup.mosquitoMechanism2()->setRawValue(onboardStatus.humidity[0] / 100.f);
+    //_mosquitoMechanismFactGroup.mosquitoMechanism3()->setRawValue(onboardStatus.temperature[2] / 100.f);
 }
 
 void Vehicle::_handleAttitudeTarget(mavlink_message_t& message)

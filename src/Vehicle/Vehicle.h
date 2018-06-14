@@ -1117,6 +1117,7 @@ private:
     void _handleAttitudeQuaternion(mavlink_message_t& message);
     void _handleAttitudeTarget(mavlink_message_t& message);
     void _handleDistanceSensor(mavlink_message_t& message);
+    void _handleWerOnboardStatus(mavlink_message_t& message);
     // ArduPilot dialect messages
 #if !defined(NO_ARDUPILOT_DIALECT)
     void _handleCameraFeedback(const mavlink_message_t& message);

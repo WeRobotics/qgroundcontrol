@@ -1,14 +1,14 @@
 [
 {
     "name":             "mosquitoMechanism1",
-    "shortDescription": "Humidity (1)",
+    "shortDescription": "Temperature",
     "type":             "double",
     "decimalPlaces":    2,
-    "units":            "%"
+    "units":            "°C"
 },
 {
     "name":             "mosquitoMechanism2",
-    "shortDescription": "Humidity (2)",
+    "shortDescription": "Humidity",
     "type":             "double",
     "decimalPlaces":    2,
     "units":            "%"
